@@ -1,7 +1,7 @@
 {
   "name": "@jetblack/date-mui",
   "private": false,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Adapter for @jetblack/date and mui",
   "keywords": [
     "mui",
@@ -19,7 +19,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@jetblack/date": "^2.2.0"
+    "@jetblack/date": "^2.6.0"
   },
   "peerDependencies": {
     "@mui/x-date-pickers": "^6.8.0"
