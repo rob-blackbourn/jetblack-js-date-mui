@@ -219,21 +219,13 @@ export class AdapterJetBlackDate implements MuiPickersAdapter<Date, I18nSettings
   isSameYear = (value: Date, comparing: Date): boolean =>
     this.tz.year(value) === this.tz.year(comparing)
   isSameMonth(value: Date, comparing: Date): boolean {
-    const lhs = this.tz.dateParts(value, { year: true, monthIndex: true })
-    const rhs = this.tz.dateParts(comparing, { year: true, monthIndex: true })
+    const lhs = this.tz.dateParts(value)
+    const rhs = this.tz.dateParts(comparing)
     return lhs.year === rhs.year && lhs.monthIndex === rhs.monthIndex
   }
   isSameDay(value: Date, comparing: Date): boolean {
-    const lhs = this.tz.dateParts(value, {
-      year: true,
-      monthIndex: true,
-      day: true
-    })
-    const rhs = this.tz.dateParts(comparing, {
-      year: true,
-      monthIndex: true,
-      day: true
-    })
+    const lhs = this.tz.dateParts(value)
+    const rhs = this.tz.dateParts(comparing)
     return (
       lhs.year === rhs.year &&
       lhs.monthIndex === rhs.monthIndex &&
@@ -241,18 +233,8 @@ export class AdapterJetBlackDate implements MuiPickersAdapter<Date, I18nSettings
     )
   }
   isSameHour(value: Date, comparing: Date): boolean {
-    const lhs = this.tz.dateParts(value, {
-      year: true,
-      monthIndex: true,
-      day: true,
-      hours: true
-    })
-    const rhs = this.tz.dateParts(comparing, {
-      year: true,
-      monthIndex: true,
-      day: true,
-      hours: true
-    })
+    const lhs = this.tz.dateParts(value)
+    const rhs = this.tz.dateParts(comparing)
     return (
       lhs.year === rhs.year &&
       lhs.monthIndex === rhs.monthIndex &&
@@ -317,15 +299,7 @@ export class AdapterJetBlackDate implements MuiPickersAdapter<Date, I18nSettings
 
   setYear = (value: Date, count: number): Date => {
     const { monthIndex, day, hours, minutes, seconds, milliseconds } =
-      this.tz.dateParts(value, {
-        year: false,
-        monthIndex: true,
-        day: true,
-        hours: true,
-        minutes: true,
-        seconds: true,
-        milliseconds: true
-      })
+      this.tz.dateParts(value)
     return this.tz.makeDate(
       count,
       monthIndex,
@@ -338,15 +312,7 @@ export class AdapterJetBlackDate implements MuiPickersAdapter<Date, I18nSettings
   }
   setMonth = (value: Date, count: number): Date => {
     const { year, day, hours, minutes, seconds, milliseconds } =
-      this.tz.dateParts(value, {
-        year: true,
-        monthIndex: false,
-        day: true,
-        hours: true,
-        minutes: true,
-        seconds: true,
-        milliseconds: true
-      })
+      this.tz.dateParts(value)
     return this.tz.makeDate(
       year,
       count,
@@ -359,15 +325,7 @@ export class AdapterJetBlackDate implements MuiPickersAdapter<Date, I18nSettings
   }
   setDate = (value: Date, count: number): Date => {
     const { year, monthIndex, hours, minutes, seconds, milliseconds } =
-      this.tz.dateParts(value, {
-        year: true,
-        monthIndex: true,
-        day: false,
-        hours: true,
-        minutes: true,
-        seconds: true,
-        milliseconds: true
-      })
+      this.tz.dateParts(value)
     return this.tz.makeDate(
       year,
       monthIndex,
@@ -380,15 +338,7 @@ export class AdapterJetBlackDate implements MuiPickersAdapter<Date, I18nSettings
   }
   setHours = (value: Date, count: number): Date => {
     const { year, monthIndex, day, minutes, seconds, milliseconds } =
-      this.tz.dateParts(value, {
-        year: true,
-        monthIndex: true,
-        day: true,
-        hours: false,
-        minutes: true,
-        seconds: true,
-        milliseconds: true
-      })
+      this.tz.dateParts(value)
     return this.tz.makeDate(
       year,
       monthIndex,
@@ -401,15 +351,7 @@ export class AdapterJetBlackDate implements MuiPickersAdapter<Date, I18nSettings
   }
   setMinutes = (value: Date, count: number): Date => {
     const { year, monthIndex, day, hours, seconds, milliseconds } =
-      this.tz.dateParts(value, {
-        year: true,
-        monthIndex: true,
-        day: true,
-        hours: true,
-        minutes: false,
-        seconds: true,
-        milliseconds: true
-      })
+      this.tz.dateParts(value)
     return this.tz.makeDate(
       year,
       monthIndex,
@@ -422,15 +364,7 @@ export class AdapterJetBlackDate implements MuiPickersAdapter<Date, I18nSettings
   }
   setSeconds = (value: Date, count: number): Date => {
     const { year, monthIndex, day, hours, minutes, milliseconds } =
-      this.tz.dateParts(value, {
-        year: true,
-        monthIndex: true,
-        day: true,
-        hours: true,
-        minutes: true,
-        seconds: false,
-        milliseconds: true
-      })
+      this.tz.dateParts(value)
     return this.tz.makeDate(
       year,
       monthIndex,
@@ -443,15 +377,7 @@ export class AdapterJetBlackDate implements MuiPickersAdapter<Date, I18nSettings
   }
   setMilliseconds = (value: Date, count: number): Date => {
     const { year, monthIndex, day, hours, minutes, seconds } =
-      this.tz.dateParts(value, {
-        year: true,
-        monthIndex: true,
-        day: true,
-        hours: true,
-        minutes: true,
-        seconds: true,
-        milliseconds: false
-      })
+      this.tz.dateParts(value)
     return this.tz.makeDate(
       year,
       monthIndex,
@@ -487,17 +413,8 @@ export class AdapterJetBlackDate implements MuiPickersAdapter<Date, I18nSettings
   }
 
   mergeDateAndTime = (date: Date, time: Date): Date => {
-    const { year, monthIndex, day } = this.tz.dateParts(date, {
-      year: true,
-      monthIndex: true,
-      day: true
-    })
-    const { hours, minutes, seconds, milliseconds } = this.tz.dateParts(time, {
-      hours: true,
-      minutes: true,
-      seconds: true,
-      milliseconds: true
-    })
+    const { year, monthIndex, day } = this.tz.dateParts(date)
+    const { hours, minutes, seconds, milliseconds } = this.tz.dateParts(time)
     return this.tz.makeDate(
       year,
       monthIndex,
